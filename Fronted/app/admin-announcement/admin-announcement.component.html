@@ -1,0 +1,37 @@
+<select [(ngModel)]="selectedOption" class="select-option" name="option">
+    <option *ngFor="let o of option" [value]="o" [label]="o"></option>
+</select>
+
+<div id="table-wrapper">
+    <div id="table-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> <span class="text">#</span></th>
+                    <th> <span class="text">Tenant</span></th>
+                    <th> <span class="text">Email</span></th> 
+                    <th> <span class="text">Date</span></th>
+                    <th> <span class="text">Amount</span></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="selectedOption==option[0]">
+                <tr *ngFor="let invoice of paidInvoices; let i = index" class="select-req" (click)="OpenDetails(i)">
+                    <td>{{i + 1}}</td>
+                    <td>{{invoice.User.FirstName}} {{invoice.User.LastName}}</td>
+                    <td>{{invoice.User.Email}}</td>
+                    <td>{{invoice.Date | dateFormatPipe }}</td>
+                    <td>{{invoice.Amount}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="selectedOption==option[1]">
+                <tr *ngFor="let invoice of unpaidInvoices; let i = index" class="select-req" (click)="OpenDetails(i)">
+                    <td>{{i + 1}}</td>
+                    <td>{{invoice.User.FirstName}} {{invoice.User.LastName}}</td>
+                    <td>{{invoice.User.Email}}</td>
+                    <td>{{invoice.Date | dateFormatPipe }}</td>
+                    <td>{{invoice.Amount}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

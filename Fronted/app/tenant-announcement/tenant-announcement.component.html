@@ -1,0 +1,130 @@
+<div *ngIf="ready" class="row panel panel-default">
+    <div class="panel-heading">Announcements and votes</div>
+    <div class="col-md-3">
+        
+        <div class="row panel panel-default">
+            <div class="panel-heading">Options</div>
+            <div class="panel-body options">
+               <div>
+                    <input (click)="AddAnnouncementOnClick()" type="submit" class="btn" value="Add announcement">
+               </div>
+               <div>
+                    <input (click)="AddVoteOnClick()" type="submit" class="btn" value="Add vote">
+               </div>
+            </div>
+        </div>   
+
+        <div *ngIf="addAnnouncement" class="row panel panel-default">
+            <div class="panel-heading">Add new announcement</div>
+            <div class="panel-body">
+                <form (ngSubmit)="AddAnnouncement()">
+                    <div class="form-group">
+                        <label for="Title">Announcement title</label>
+                        <input required [(ngModel)]="newAnnouncement.Title" name="name" type="text" class="form-control" placeholder="Announcement title">
+                    </div>
+
+                    <div class="form-group">
+                            <label for="content">Announcement content</label>
+                            <textarea required [(ngModel)]="newAnnouncement.Content" name="name" type="text" class="form-control" placeholder="Announcement content"></textarea>
+                    </div>
+                    <button required type="submit" class="btn btn-primary">Add announcement</button>
+                </form>
+            </div>
+        </div>
+
+        <div *ngIf="addVote" class="row panel panel-default">
+                <div class="panel-heading">Add new vote</div>
+                <div class="panel-body">
+                    <form (ngSubmit)="AddVote()">
+                        <div class="form-group">
+                            <label for="Name">Vote content</label>
+                            <input required [(ngModel)]="newVote.Content" name="name" type="text" class="form-control" placeholder="Vote content">
+                        </div>
+                        <button required type="submit" class="btn btn-primary">Add Vote</button>
+                    </form>
+                </div>
+        </div>          
+    </div>
+
+    <div *ngIf="!showAnnouncementDetails" class="col-md-9">         
+        <div class="row panel panel-default">
+            <div class="panel-heading">Announcements</div>
+            <div id="table-wrapper">
+                <div id="table-scroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> <span class="text">#</span></th>
+                                <th> <span class="text">User</span></th>
+                                <th> <span class="text">Title</span></th> 
+                                <th> <span class="text">Date</span></th>
+                                <th> <span class="text">Delete</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let announcement of announcements; let i = index" class="select-req" (click)="AnnouncementDetails(i)">
+                                <td>{{i + 1}}</td>
+                                <td>{{announcement.User.UserName}}</td>
+                                <td>{{announcement.Title}}</td>
+                                <td>{{announcement.Date | dateFormatPipe }}</td>
+                                <td> <input type="submit" class="btn btn-danger" value="Delete" (click)="$event.stopPropagation(); DeleteAnnouncement(announcement, i)"> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row panel panel-default">
+            <div class="panel-heading">Votes</div>
+            <div id="table-wrapper">
+                    <div id="table-scroll">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> <span class="text">#</span></th>
+                                    <th> <span class="text">User</span></th>
+                                    <th> <span class="text">Content</span></th> 
+                                    <th> <span class="text">Number of votes</span></th> 
+                                    <th> <span class="text">Date</span></th>
+                                    <th> <span class="text">Status</span></th>
+                                    <th> <span class="text">Vote For</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let vote of votes; let i = index" class="select-req">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{vote.User.UserName}}</td>
+                                    <td>{{vote.Content}}</td>
+                                    <td>{{vote.NumberOfVotes}}</td>
+                                    <td>{{vote.Date | dateFormatPipe }}</td>
+                                    <td *ngIf="vote.Status">Adopted</td>
+                                    <td *ngIf="!vote.Status">Not Adopted</td>
+                                    <td> <input (click)="VoteOnClick(i); EditVote(vote, i)" *ngIf="votedAnnouncemnts[i]" type="submit" class="btn btn-success" value="Vote"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div *ngIf="showAnnouncementDetails" class="col-md-9">
+        <div class="row panel panel-default">
+            <div class="panel-heading">
+                <span [innerText]="detailAnnouncement.Title"></span>
+                <i class="fa fa-times-circle" aria-hidden="true" (click)="HideDetails()"></i>
+            </div>
+            
+            <div class="panel-body">
+                <div class="row">
+                    <span class="poster">
+                        <h1>Poster: </h1><h1 [innerText]="detailAnnouncement.User.UserName"></h1>
+                    </span>
+                </div>
+                <div class="row">
+                    <h3 [innerText]="detailAnnouncement.Content"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

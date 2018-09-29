@@ -1,0 +1,45 @@
+h4 {
+    text-align: center;
+    color: darkslategray;
+    margin-bottom: 50px;
+}
+
+.select-req:hover {
+    cursor: pointer;
+    background: dimgray;
+}
+
+.fa-times-circle {
+    color:red;
+    display: inline;
+}
+.fa-times-circle:hover {
+    cursor: pointer;
+}
+
+.details-remove {
+    font-size: 20px;;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:400px;
+  overflow:auto;  
+  margin-top:20px;
+}
+#table-wrapper table {
+  width:100%;
+    
+}
+
+#table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
+}

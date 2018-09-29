@@ -1,0 +1,83 @@
+
+
+<div *ngIf="smartHome==null">
+    <div class="create-smart">
+       <div class="title">
+            <h3> Creating Smart Home </h3>
+        </div>
+        <form  (ngSubmit)="CreateSmartHome()" class="form-horizontal create-ip">
+            <h5> IP </h5>
+            <input [(ngModel)]="ip" required  name="ip" class="input-ip" type="text" placeholder="Input ip"  pattern="[0-9.]{9,15}">
+            <input type="submit" class="btn btn-success create-button" value="Create">
+        </form>
+   </div>
+</div>
+
+<div *ngIf="ready">
+<div *ngIf="smartHome!=null">
+    <h2 *ngIf="smartHome.IsActivated"> Activated Smart Home</h2>
+    <h2 *ngIf="smartHome.IsActivated==false"> Disabled Smart Home</h2>
+    <div class="info">
+        <div class="left-info">
+            <span> IP: {{smartHome.Ip}} </span>
+            <button *ngIf="smartHome.IsActivated == false" class="activate btn btn-success" (click)="Activate(true)"> Activate </button>
+            <button *ngIf="smartHome.IsActivated" class="dezactivate btn btn-danger" (click)="Activate(false)"> Disable </button> 
+        </div>
+        <div class="right-info">
+            <button class="configure btn btn-primary" (click)="Configure()"> Configure Smart Home </button>
+            <button class="delete btn btn-danger" (click)="Delete()"> Delete Smart Home </button>
+        </div>
+    </div>
+    <div class="notif-list">
+        <div class="title">
+            <h3> Notified Tenants </h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> <span class="text">#</span></th>
+                    <th> <span class="text">Tenant</span></th>
+                    <th> <span class="text">Date Added</span></th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let notif of notifiedTenants; let i = index" class="select-req">
+                    <td>{{i + 1}}</td>
+                    <td>{{notif.User.FirstName}} {{notif.User.LastName}}</td>
+                    <td>{{notif.Date | dateTimeFormatPipe }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="smart-option" *ngIf="showConfigure">
+   <div class="create-smart">
+       <div class="title">
+            <h3> Configure Smart Home </h3>
+        </div>
+        <form  (ngSubmit)="ApplyChanges()" class="form-horizontal create-ip">
+            <h5> IP </h5>
+            <input [(ngModel)]="ip" required  name="ip" class="input-ip" type="text" placeholder="Input ip"  pattern="[0-9.]{9,15}">
+             <table class="table">
+                <thead>
+                    <tr>
+                        <th> <span class="text">Tenant</span></th>
+                        <th> <span class="text">Valid</span></th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let notif of notifUsers; let i = index"  class="select-req">
+                        <td *ngIf="notif.User.Id != currentUser.Id">{{notif.User.FirstName}} {{notif.User.LastName}}</td>
+                        <td *ngIf="notif.User.Id != currentUser.Id && notif.IsActivated==false"><button class="btn btn-success act-dez-btn" (click)="ActivateNotif(i,true)">Activate</button></td>
+                        <td *ngIf="notif.User.Id != currentUser.Id && notif.IsActivated"><button class="btn btn-danger act-dez-btn" (click)="ActivateNotif(i,false)">Disable</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" class="btn btn-success apply" value="Apply Setings">
+            <input (click)="GiveUp()" class="btn btn-danger apply" value="Give Up" readonly>
+        </form>
+       
+   </div>
+</div>
+</div>

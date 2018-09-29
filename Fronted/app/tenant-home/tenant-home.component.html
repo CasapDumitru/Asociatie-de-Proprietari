@@ -1,0 +1,135 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+         <div class="navbar-header">
+            <a class="navbar-brand" [routerLink]="['./']" (click)="ShowEvents(true)">
+                <i class="fa fa-home"></i>
+            </a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li>
+                <a routerLink="./requirement" routerLinkActive="active" (click)="ShowEvents(false)">Requirement</a>
+            </li>
+            <li>
+                <a routerLink="./announcement" routerLinkActive="active" (click)="ShowEvents(false)">Announcement </a>
+            </li>
+            <li>
+                <a routerLink="./payment" routerLinkActive="active" (click)="ShowEvents(false)">Online Payment </a>
+            </li>
+            <li>
+                <a routerLink="./smartHome" routerLinkActive="active" (click)="ShowEvents(false)">Smart Home </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav logout">
+            <li>
+                <a routerLink="./../">Logout <i class="fa fa-sign-out" aria-hidden="true"></i> </a> 
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="col-xs-9">
+    <div *ngIf="showEvents">
+        <div class="col-xs-4">
+            <h3>Select month</h3>
+            <div>
+                <input [(ngModel)]="currentMonth" class="select-date" type="month" name="startDate"/>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <h3> {{monthName}} </h3>
+            <div class="events">
+                 <div *ngFor="let e of events;let i = index">
+                    <div *ngIf="e.User.Id == currentUser.Id" class="event my-event">
+                        <span> Title: {{e.Title}} </span>
+                        <i (click)="DeleteEvent(e.Id,i)" class="fa fa-times" aria-hidden="true"></i>
+                        <span> Description: {{e.Description}} </span>
+                        <span> Location: {{e.Location}} </span>
+                        <span> Owner: {{e.User.FirstName}} {{e.User.LastName}} </span>
+                        <span> Date: {{e.Date | dateTimeFormatPipe}} </span>
+                    </div>
+                    <div *ngIf="e.User.Id != currentUser.Id" class="event">
+                        <span> Title: {{e.Title}} </span> 
+                        <span> Description: {{e.Description}} </span>
+                        <span> Location: {{e.Location}} </span>
+                        <span> Owner: {{e.User.FirstName}} {{e.User.LastName}} </span>
+                        <span> Date: {{e.Date | dateTimeFormatPipe}} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 create-event">
+            <h3> Create Event </h3>
+
+            <form #f="ngForm"  (ngSubmit)="CreateEvent()"  class="form-horizontal">
+        
+            <div class="col-md-12">
+
+            <div class="form-group row">
+                    <label for="Title" class="col-md-2 col-form-label">Title</label>
+                    <div class="col-md-10">
+                        <input  [(ngModel)]="newEvent.Title" name="title"  required  class="form-control" type="text" placeholder="Input Title" id="title-input">
+                    </div>
+            </div>
+            <div class="form-group row">
+                    <label for="Description" class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-10">
+                        <input [(ngModel)]="newEvent.Description" name="description" required class="form-control" type="text" placeholder="Input Description" id="description-input">
+                    </div>
+            </div>
+            <div class="form-group row">
+                    <label for="Location" class="col-md-2 col-form-label">Location</label>
+                    <div class="col-md-10">
+                        <input [(ngModel)]="newEvent.Location" name="description" required class="form-control" type="text" placeholder="Input Location" id="location-input">
+                    </div>
+            </div>
+            <div class="form-group row">
+                    <label for="Date" class="col-md-2 col-form-label">Date</label>
+                    <div class="col-md-10">
+                    <input class="date-input" [(ngModel)]="newEvent.Date" name="date" required ng2-datetime-picker close-on-select="true" />
+                    </div>
+            </div>
+            <div class="form-group"> 
+                <div class="col-md-offset-4 col-md-4">
+                    <button  style="width: 100%" type="submit" class="btn btn-default create">Create Event</button>
+                </div>
+            </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+<div class="col-xs-3 all-users">
+    <h3> Users </h3>
+    <div class="aaa">
+        <div *ngFor="let user of users" class="user" (click)="OpenMessage(user)">
+            <span *ngIf="user.Id != currentUser.Id"> <i *ngIf="user.UserType==1" class="fa fa-user" aria-hidden="true"></i> {{user.FirstName}} {{user.LastName}} </span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showConversation" class="name">
+    <h3> {{conversationUser.FirstName}} {{conversationUser.LastName}} <i class="fa fa-times-circle" aria-hidden="true" (click)="HideConversation()"></i> </h3>
+</div>
+
+<div *ngIf="showConversation" class="conversation" [scrollTop]="scrollTop">
+        <div *ngFor="let m of messages">
+            <label class="user-message" *ngIf="m.User.Id == currentUser.Id">
+                {{m.User.UserName}} :
+                {{m.Text}}
+                <span class="message-date">{{m.Date | dateTimeFormatPipe }} </span>
+            </label>
+            
+            <label class="my-message" *ngIf="m.User.Id != currentUser.Id">
+                Me :
+                {{m.Text}}
+                <span class="message-date">{{m.Date | dateTimeFormatPipe }} </span>
+            </label>
+        </div> 
+</div>
+<div *ngIf="showConversation" class="input-send">
+    <input required name="messageText"  [(ngModel)]="messageText" placeholder="Input Your Message" class="input" /> 
+    <button (click)="SendMessage()" style = "width:100" class="send" > Send </button>   
+</div>

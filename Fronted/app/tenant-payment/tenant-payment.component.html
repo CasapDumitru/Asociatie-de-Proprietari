@@ -1,0 +1,41 @@
+<div *ngIf="ready">
+    <div class="row" >
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> <span class="text">#</span></th>
+                            <th> <span class="text">Tenant</span></th>
+                            <th> <span class="text">Email</span></th> 
+                            <th> <span class="text">Date</span></th>
+                            <th> <span class="text">Amount</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let invoice of unpaidInvoices; let i = index" class="select-req" (click)="GetSelectedInvoice(invoice, i)">
+                            <td>{{i + 1}}</td>
+                            <td>{{invoice.User.FirstName}} {{invoice.User.LastName}}</td>
+                            <td>{{invoice.User.Email}}</td>
+                            <td>{{invoice.Date | dateFormatPipe }}</td>
+                            <td>{{invoice.Amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="showPayment" class="row">
+        <div class="col-md-4">
+            <form (ngSubmit)="PayInvoice()">
+                <div class="form-group">
+                    <label for="Account number">Introduce the card number</label>
+                    <input required [(ngModel)]="cardNumber" name="name" type="text" class="form-control" placeholder="Card Number">
+                    <span *ngIf="showError" class="text-danger"> You entered the wrong card number! </span>
+                </div>
+                <button required type="submit" class="btn btn-primary">Pay invoice</button>
+            </form>
+        </div>
+    </div>
+</div>

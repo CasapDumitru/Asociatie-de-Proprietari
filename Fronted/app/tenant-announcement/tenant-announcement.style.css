@@ -1,0 +1,43 @@
+.row {
+    margin-top: 10px;
+}
+
+.options {
+    padding-right: 10px;
+}
+
+.options div {
+    margin-bottom: 10px;
+}
+
+.options div input {
+    width: 245px;
+}
+
+.select-req:hover {
+    cursor: pointer;
+    background: dimgray;
+}
+
+#table-wrapper {
+  position:relative;
+}
+
+#table-scroll {
+  height:200px;
+  overflow:auto;  
+  margin-top:20px;
+}
+
+#table-wrapper table {
+  width:100%;
+}
+
+.poster h1 {
+    display: inline;
+}
+
+.fa-times-circle {
+    margin-left: 620px;
+    color:red;
+}

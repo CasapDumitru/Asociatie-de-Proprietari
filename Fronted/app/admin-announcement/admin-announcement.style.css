@@ -1,0 +1,36 @@
+select {
+  cursor: pointer;
+  margin-bottom: 80px;
+  border: 1px solid #111;
+  background-color: mediumspringgreen;
+  width: 350px;
+  padding: 5px 35px 5px 5px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  height: 34px;
+}
+
+option {
+    background-color: lawngreen;
+    cursor: pointer;
+}
+
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:500px;
+  overflow:auto;  
+  margin-top:20px;
+}
+#table-wrapper table {
+  width:100%; 
+}
+
+#table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
+}

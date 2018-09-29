@@ -1,0 +1,20 @@
+<div class="rapoarte">
+    <div class="title">
+        <h3> Generating Reports </h3>
+    </div>
+    <div class="raport">
+        <h5> Maintenance Situation - this month  </h5>
+        <button (click)="DownloadMaintenancePdfCurrentMonth()" class="pdf-button"> Download pdf file </button>
+        <button (click)="DownloadMaintenanceExcelCurrentMonth()" class="pdf-button csv-button"> Download excel file </button>
+    </div>
+    <div class="raport">
+        <h5> Maintenance Situation - previous month  </h5>
+        <button (click)="DownloadMaintenancePdfPreviousMonth()" class="pdf-button"> Download pdf file </button>
+        <button (click)="DownloadMaintenanceExcelPreviousMonth()" class="pdf-button csv-button"> Download excel file </button>
+    </div>
+    <div class="raport">
+        <h5> Balance Expenditures </h5>
+        <button (click)="DownloadBalancePdf()" class="pdf-button"> Download pdf file </button>
+        <button (click)="DownloadBalanceExcel()"  class="pdf-button csv-button"> Download excel file </button>
+    </div>
+</div>

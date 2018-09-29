@@ -1,0 +1,85 @@
+<div *ngIf="ready">
+<div class="col-md-7 col-xs-12">
+    <h4> Requirements List </h4>
+    <div id="table-wrapper">
+        <div id="table-scroll">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> <span class="text">#</span></th>
+                        <th> <span class="text">Name</span></th>
+                        <th> <span class="text">Description</span></th> 
+                        <th> <span class="text">Owner</span></th>
+                        <th> <span class="text">Date</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let requirement of requirements; let i = index" class="select-req" (click)="OpenDetails(i)">
+                        <td>{{i + 1}}</td>
+                        <td>{{requirement.Name}}</td>
+                        <td *ngIf="requirement.Description.length <= 9" >{{requirement.Description.substring(0,9)}} </td>
+                        <td *ngIf="requirement.Description.length > 9" >{{requirement.Description.substring(0,9)}} ... </td>
+                        <td>{{requirement.User.UserName}}</td>
+                        <td>{{requirement.Date | dateFormatPipe }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-md-5 col-xs-12">
+    <h4> Create new requirement </h4>
+    <form  (ngSubmit)="CreateRequirement()" class="form-horizontal">      
+        <div class="form-group row">
+            <label for="Name" class="col-md-4 col-form-label">Name</label>
+            <div class="col-md-8">
+                <input  [(ngModel)]="newRequirement.Name" name="name"  required  class="form-control" type="text" placeholder="Input name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Description" class="col-md-4 col-form-label">Description</label>
+            <div class="col-md-8">
+                <textarea rows="6" required [(ngModel)]="newRequirement.Description" name="description" >
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-offset-4 col-md-8">
+                <input type="submit" class="form-control btn btn-success" value="Create Requirement">
+            </div>
+        </div>
+    </form>
+    <div *ngIf="showDetails">
+        <div class="details-remove">
+            <span> Requirement Details  </span>
+            <i class="fa fa-times-circle" aria-hidden="true" (click)="HideDetails()"></i>
+        </div>
+        <form class="form-horizontal">      
+            <div class="form-group row">
+                <label for="Name" class="col-md-4 col-form-label">Name</label>
+                <div class="col-md-8">
+                    <input  [(ngModel)]="detailRequirement.Name" name="name" class="form-control" type="text" placeholder="Input name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Description" class="col-md-4 col-form-label">Description</label>
+                <div class="col-md-8">
+                    <textarea rows="6" [(ngModel)]="detailRequirement.Description" name="description" >
+                    </textarea>
+                </div>
+            </div>
+            <div *ngIf="editRequirement" class="form-group row">
+            <div class="col-md-6">
+                <input (click)="Delete()" class="form-control btn btn-danger" value="Delete">
+            </div>
+            <div class="col-md-6">
+                <input (click)="Edit()" class="form-control btn btn-primary" value="Edit">
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+
+
+

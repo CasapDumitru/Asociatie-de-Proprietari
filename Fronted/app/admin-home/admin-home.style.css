@@ -1,0 +1,192 @@
+.nav .active {
+    background-color: lightgray;
+}
+
+.navbar {
+    font-size: 20px;
+}
+
+.nav a:hover {
+    color: goldenrod;
+}
+
+.navbar-header a:hover {
+    color: goldenrod;
+}
+
+.logout {
+    float: right;
+    margin-right: 0px;
+}
+
+.logout a:hover {
+    color: red;
+}
+
+h3 {
+    color: darkslategray;
+    text-align: center;
+}
+
+.user {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.user:hover {
+    cursor: pointer;
+    background-color: #acaeaf;
+}
+
+.all-users {
+    background-color: #e2e0e2;
+    border-radius: 20px;
+    border: solid 2px darkblue;  
+}
+
+.aaa {
+    height: 75vh;
+    overflow: auto; 
+}
+
+.conversation {
+    height: 200px;
+    width: 340px;
+    background-color: #dbdcdd;
+    position: absolute;
+    right: 60vh;
+    top: 55vh;
+    overflow: auto; 
+    border: 2px solid darkblue;
+}
+
+.input-send {
+    width: 340px;
+    position: absolute;
+    right: 60vh;
+    top: 86vh;
+    background-color: #dbdcdd;
+    border: 2px solid darkblue;
+    border-radius: 5%;
+}
+
+.name i {
+    cursor: pointer;
+    color: red;
+    margin-left: 15px;
+}
+
+.name h3 {
+    margin-top: 0px;
+}
+
+.name {
+    position: absolute;
+    width: 340px;
+    right: 60vh;
+    top: 48vh;
+    background-color: #dbdcdd;
+    border: 2px solid darkblue;
+}
+
+.user-message {
+    margin-top: 10px;
+    background-color: #cdd1d6;
+    padding: 5px 10px;
+    border-radius: 10%;
+    position: relative
+}
+
+.my-message {
+    margin-top: 10px;
+    margin-left: 25px;
+    background-color: #708cb2;
+    padding: 5px 10px;
+    border-radius: 10%;
+}
+
+.search-results {
+    background-color: #e6ebf2;
+}
+
+.message-date {
+    visibility: hidden;
+    width: 320px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+}
+
+.my-message:hover .message-date {
+    visibility: visible;
+}
+
+.user-message:hover .message-date {
+    visibility: visible;
+}
+
+.input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+    border-radius: 10%;
+    border: 2px solid lightslategrey;
+}
+
+.send {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: right;
+    background-color: lawngreen;
+    border: 2px solid green;
+    border-radius: 20%;
+}
+
+.events {
+    height: 310px;
+    overflow: auto;
+}
+
+.event {
+    border: solid 1px darkslategray;
+    margin-top: 10px;
+    background-color: #cbabcc;
+    font-size: 20px;
+    border-radius: 5%;
+}
+
+.my-event {
+    background-color: #b9ccea;
+}
+
+.my-event i {
+    color:red;
+    float: right;
+    margin-top: -20px;
+    margin-right: 15px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.event span {
+    display: block;
+}
+
+.select-date {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.create-event {
+    margin-top: 20px;
+}
+
+.create {
+    background-color: limegreen;
+    font-size: 20px;
+    border-radius: 25px;
+    border: 2px solid green;
+}
